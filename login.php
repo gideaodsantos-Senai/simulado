@@ -37,9 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Login</h1>
+    <div class="container">
+        <h1>Login</h1>
 
     <?php if ($erro): ?>
         <p style="color: red;"><?php echo $erro; ?></p>
@@ -56,5 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 
     <p>Não tem uma conta? <a href="registro.php">Cadastre-se aqui</a></p>
+    </div>
 </body>
 </html>
