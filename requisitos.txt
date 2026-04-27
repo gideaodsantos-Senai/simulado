@@ -1,0 +1,19 @@
+Projeto: Sistema de Controle de Inventário SAEP
+Infraestrutura de Dados: Banco de dados relacional saep_db (Script SQL).
+Autenticação e Segurança:
+Módulo de login com persistência de sessão.
+Exibição do perfil do usuário ativo no cabeçalho.
+Funcionalidade de encerramento de sessão com redirecionamento automático.
+Módulos do Sistema:
+Painel de Inventário (CRUD):
+Exibição dinâmica de dados via consulta ao banco.
+Motor de busca integrado para filtragem de itens.
+Gerenciamento completo (Inclusão, Alteração e Remoção) com validação de formulários.
+Retorno imediato ao Dashboard após operações concluídas.
+Módulo de Movimentações:
+Tabela de controle de fluxo de mercadorias.
+Registro manual de entradas e saídas com data retroativa/atual.
+Sistema de alertas preventivos para níveis críticos de estoque mínimo.
+Stack Tecnológica:
+Backend: PHP com MySQL (via MySQL Workbench).
+Frontend: HTML5, CSS3 e lógica em JavaScript.
