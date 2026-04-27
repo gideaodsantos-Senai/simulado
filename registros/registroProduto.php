@@ -22,15 +22,15 @@ $conn = new mysqli($host, $user, $pass, $db);
     <fieldset>
         <legend>Escolha o Produto que deseja Registrar</legend>
         <label for="">Notbook</label>
-        <button><a href="../registros/registroNotbook.php">Registrar Notbook</a></button>
+        <button><a href="registroNotbook.php">Registrar Notbook</a></button>
         <br>
         <label for="">Smart TV</label>
-        <button><a href="../registros/registroTv.php">Registrar Smart TV</a></button>
+        <button><a href="registroTv.php">Registrar Smart TV</a></button>
         <br>
         <label for="">Smartphone</label>
-        <button><a href="../registros/registroCelular.php">Registrar Smartphone</a></button>
+        <button><a href="registroCelular.php">Registrar Smartphone</a></button>
         <br><br>
-        <button><a href="../../simulado/index.php">Voltar</a></button>
+        <button><a href="../index.php">Voltar</a></button>
     </fieldset>
 </body>
 

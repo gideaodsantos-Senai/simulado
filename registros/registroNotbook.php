@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br>
         <input type="submit">
         <br><br>
-        <button><a href="../registros/registroProduto.php">Voltar</a></button>
+        <button><a href="registroProduto.php">Voltar</a></button>
 </body>
 
 </html>
