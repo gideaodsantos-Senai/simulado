@@ -1,47 +1,59 @@
 <?php
-$host = 'localhost';
-$db = 'saep_db';
-$user = 'root';
-$pass = '';
+session_start();
+require_once 'config.php';
 
-$conn = new mysqli($host, $user, $pass, $db);
+$erro = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
+    $nome = $_POST['nome'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $senha = $_POST['senha'] ?? '';
 
-    $sql = "INSERT INTO usuario (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
-    $conn->query($sql);
-    echo "Registro bem-sucedido!";
-} else {
-    echo "Erro ao registrar usuário.";
+    if (!empty($nome) && !empty($email) && !empty($senha)) {
+        try {
+            $stmt = $pdo->prepare("INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)");
+            $stmt->execute([$nome, $email, $senha]);
+            
+            $_SESSION['usuario_id'] = $pdo->lastInsertId();
+            $_SESSION['usuario_nome'] = $nome;
+            
+            header("Location: index.php");
+            exit();
+        } catch (PDOException $e) {
+            $erro = "Erro ao registrar: " . $e->getMessage();
+        }
+    } else {
+        $erro = "Preencha todos os campos.";
+    }
 }
-
 ?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Produtos - Registro de Usuario</title>
+    <title>Registro</title>
 </head>
-
 <body>
-    <h1>Registro de Usuarios</h1>
-    <form action="registro.php" method="POST">
-        <label for="nome">Nome:</label>
-        <input type="text" name="nome" placeholder="Insira seu Nome" required>
-        <br>
-        <label for="email">Email:</label>
-        <input type="email" name="email" placeholder="Insira seu Email" required>
-        <br>
-        <label for="senha">Senha:</label>
-        <input type="password" name="senha" placeholder="Insira sua Senha" required>
-        <br>
-        <input type="submit">
-    </form>
-</body>
+    <h1>Criar Conta</h1>
 
+    <?php if ($erro): ?>
+        <p style="color: red;"><?php echo $erro; ?></p>
+    <?php endif; ?>
+
+    <form action="registro.php" method="POST">
+        <label>Nome:</label><br>
+        <input type="text" name="nome" required><br><br>
+        
+        <label>E-mail:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>Senha:</label><br>
+        <input type="password" name="senha" required><br><br>
+
+        <input type="submit" value="Registrar">
+    </form>
+
+    <p><a href="login.php">Já tem conta? Login</a></p>
+</body>
 </html>
