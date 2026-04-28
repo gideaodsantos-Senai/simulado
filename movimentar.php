@@ -1,4 +1,4 @@
-<?php 
+<?php
 include 'config.php';
 $tabela = $_GET['tabela'];
 $id = $_GET['id'];
@@ -7,7 +7,8 @@ $produto = $conexao->query("SELECT * FROM $tabela WHERE $id_coluna = $id")->fetc
 if ($_POST) {
     $tipo = $_POST['tipo'];
     $data = $_POST['data'];
-    $ajuste = ($tipo == 'entrada') ? "+ 1" : "- 1";
+    $quantidade_mov = $_POST['quantidade'];
+    $ajuste = ($tipo == 'entrada') ? "+ $quantidade_mov" : "- $quantidade_mov";
     $conexao->query("UPDATE $tabela SET quantidade = quantidade $ajuste WHERE $id_coluna = $id");
     $atualizado = $conexao->query("SELECT * FROM $tabela WHERE $id_coluna = $id")->fetch_assoc();
     if ($tipo == 'saida' && $atualizado['quantidade'] < $atualizado['estoque_min']) {
@@ -24,9 +25,13 @@ if ($_POST) {
     <form method="POST">
         <label>Tipo de Movimentação:</label><br>
         <select name="tipo" required>
-            <option value="entrada">Entrada (+1)</option>
-            <option value="saida">Saída (-1)</option>
+            <option value="entrada">Entrada (+)</option>
+            <option value="saida">Saída (-)</option>
         </select><br><br>
+
+        <label>Quantidade:</label><br>
+        <input type="number" name="quantidade" min="1" value="1" required><br><br>
+
         <label>Data da Movimentação:</label><br>
         <input type="date" name="data" required><br><br>
         <button type="submit">Confirmar</button>
