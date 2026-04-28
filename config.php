@@ -1,2 +1,2 @@
 <?php
-$conn = new mysqli('localhost', 'root', '', 'saep_db');
+$conexao = new mysqli('localhost', 'root', '', 'saep_db');

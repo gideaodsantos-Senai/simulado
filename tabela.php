@@ -1,38 +1,31 @@
-<?php
-include 'config.php';
-$tabelas = ['notebooks' => 'Notebooks', 'smart_tvs' => 'Smart TVs', 'smartphones' => 'Smartphones'];
-?>
+<?php include 'config.php'; ?>
 <link rel="stylesheet" href="style.css">
-<div class="container">
-    <h1>Controle de Estoque</h1>
-    <?php foreach ($tabelas as $tabela => $nome): ?>
-        <h2><?= $nome ?></h2>
-        <table border="1">
-            <tr>
-                <th>Nome</th>
-                <th>Qtd</th>
-                <th>Min</th>
-                <th>Status</th>
-                <th>Ações</th>
-            </tr>
-            <?php
-            $res = $conn->query("SELECT * FROM $tabela");
-            while ($r = $res->fetch_assoc()):
-                ?>
-                <tr>
-                    <td><?= $r['nome'] ?></td>
-                    <td><?= $r['quantidade'] ?></td>
-                    <td><?= $r['estoque_min'] ?></td>
-                    <td><?= $r['quantidade'] < $r['estoque_min'] ? 'BAIXO' : 'OK' ?></td>
-                    <td>
-                        <a href="atualizar_estoque.php?tabela=<?= $tabela ?>&id=<?= $r["id$tabela"] ?>&operacao=incluir"><button
-                                style="color: green;">+</button></a>
-                        <a href="atualizar_estoque.php?tabela=<?= $tabela ?>&id=<?= $r["id$tabela"] ?>&operacao=retirar"><button
-                                style="color: red;">-</button></a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
-        </table>
-    <?php endforeach; ?>
-    <button onclick="location.href='index.php'">Voltar</button>
-</div>
+<?php
+foreach (['notebooks', 'smart_tvs', 'smartphones'] as $tabela) {
+    echo "<h2>$tabela</h2>
+    <table border=1>
+    <tr>
+        <th>Nome</th>
+        <th>Quantidade</th>
+        <th>Estoque Mínimo</th>
+        <th>Status</th>
+        <th>Ações</th>
+    </tr>";
+    $resultado = $conexao->query("SELECT * FROM $tabela");
+    while ($linha = $resultado->fetch_assoc()) {
+        $status = $linha['quantidade'] < $linha['estoque_min'] ? 'BAIXO' : 'OK';
+        echo "<tr>
+            <td>$linha[nome]</td>
+            <td>$linha[quantidade]</td>
+            <td>$linha[estoque_min]</td>
+            <td>$status</td>
+            <td>
+                <a href='atualizar_estoque.php?tabela=$tabela&id={$linha["id$tabela"]}&operacao=incluir'>+</a>
+                <a href='atualizar_estoque.php?tabela=$tabela&id={$linha["id$tabela"]}&operacao=retirar'>-</a>
+            </td>
+            </tr>";
+    }
+    echo "</table>";
+}
+?>
+<br><a href="index.php">Voltar</a>
