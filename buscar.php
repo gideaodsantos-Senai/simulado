@@ -6,26 +6,17 @@
         <input name="busca" placeholder="Digite o nome do produto..." required>
         <button>Pesquisar</button>
     </form>
-
     <?php
     if (isset($_GET['busca'])) {
         $busca = $_GET['busca'];
         echo "<h2>Resultados para: '$busca'</h2>";
-
         foreach (['notebooks', 'smart_tvs', 'smartphones'] as $tabela) {
             $resultado = $conexao->query("SELECT * FROM $tabela WHERE nome LIKE '%$busca%'");
-
-            // Verifica se existem dados na tabela
-            if ($resultado->num_rows > 0) { //num_rows = número de linhas do resultado
+            if ($resultado->num_rows > 0) {
                 echo "<h3>Em $tabela:</h3>
                 <table border='1'>
-                <tr>
-                    <th>Nome</th>
-                    <th>Quantidade</th>
-                    <th>Estoque Mínimo</th>
-                </tr>";
-                // Faz o loop em cada linha das tabelas
-                while ($linha = $resultado->fetch_assoc()) { //"fetch_assoc()" organiza os produtos em linhas
+                <tr><th>Nome<th>Quantidade<th>Estoque Mínimo</tr>";
+                while ($linha = $resultado->fetch_assoc()) {
                     echo "<tr>
                             <td>$linha[nome]</td>
                             <td>$linha[quantidade]</td>
