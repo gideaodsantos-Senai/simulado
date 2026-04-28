@@ -1,37 +1,10 @@
-<?php
-$host = 'localhost';
-$db = 'saep_db';
-$user = 'root';
-$pass = '';
-
-$conn = new mysqli($host, $user, $pass, $db);
-
-?>
-
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Produtos</title>
-</head>
-
+<html>
 <body>
-    <h1>Registro de Produtos</h1>
-    <fieldset>
-        <legend>Escolha o Produto que deseja Registrar</legend>
-        <label for="">Notbook</label>
-        <button><a href="registroNotbook.php">Registrar Notbook</a></button>
-        <br>
-        <label for="">Smart TV</label>
-        <button><a href="registroTv.php">Registrar Smart TV</a></button>
-        <br>
-        <label for="">Smartphone</label>
-        <button><a href="registroCelular.php">Registrar Smartphone</a></button>
-        <br><br>
-        <button><a href="../index.php">Voltar</a></button>
-    </fieldset>
+    <h1>Registrar</h1>
+    <a href="registroNotbook.php">Notebook</a><br>
+    <a href="registroTv.php">Smart TV</a><br>
+    <a href="registroCelular.php">Smartphone</a><br><br>
+    <a href="../index.php">Voltar</a>
 </body>
-
 </html>
